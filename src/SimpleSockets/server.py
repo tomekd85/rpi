@@ -15,16 +15,19 @@ def go_right(key):
 def received(el):
     print("Received {}".format(el))
 
-special_keys = (b"\x1b", b"\x1b", b"\x1b", b"\x1b")
+special_keys = (b"\x1b[A", b"\x1b[B", b"\x1b[C", b"\x1b[D")
 
 
-actions = { b"w": go_forward,
-            b"a": go_left,
-            b"s": go_backward,
-            b"d": go_right
-            }
+actions = {b"w": go_forward,
+           b"a": go_left,
+           b"s": go_backward,
+           b"d": go_right,
+           b"\x1b[A": go_forward,
+           b"\x1b[B": go_backward,
+           b"\x1b[C": go_right,
+           b"\x1b[D": go_left
+          }
 
-actions.setdefault(received)
 
 HOST = '127.0.0.1'        # Symbolic name meaning all available interfaces
 PORT = 58888              # Arbitrary non-privileged port
@@ -39,24 +42,25 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print('Connected by', addr)
             while True:
                 data = conn.recv(1024)
-                el = data
-                #for el in data:
-                #    el = bytes(el)
-                   # if b"\x1b" == el or special_char:
-                   #     special_char.append(el)
-                   #     key = b"".join(special_char)
-                   #     if key in special_keys or len(key) >= 3:
-                   #         special_char = []
+                for int_el in data:
+                    el = bytes([int_el])
+                    if el == b"\x1b" or special_char:
+                        special_char.append(int_el)
+                        key = bytes(special_char)
+                        if key in special_keys:
+                            special_char = []
+                        elif len(special_char) >= 3:
+                            special_char = []
+                        else:
+                            continue
+                    else:
+                        key = data
 
-                if b"q" == el:
+                if el == b"q":
                     socket_loop = False
                     conn.close()
                     break
-                else:
-                    key = el
-                print(key)
                 func = actions.get(key, received)
-                print(func)
                 func(key)
 
 
