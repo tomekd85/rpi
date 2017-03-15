@@ -25,5 +25,15 @@ class TestEventLoop(unittest.TestCase):
         loop.call_soon(_check_running, loop)
         loop.run_forever()
 
+    def test_TCP_Server(self):
+        exit_sign = 'q'
+        read_sign = ''
+        while read_sign != exit_sign:
+            if read_sign == "":
+                read = rsock.recv(100)
+            read_sign = "q"
+
+
+
 if __name__ == '__main__':
     unittest.main()
