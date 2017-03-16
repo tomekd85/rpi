@@ -1,5 +1,7 @@
-1. Write your own GPIO emulation implementation.
-  - write pin output to a file every one second
+1. Listener pattern ? how to steer and stop robot to avoid impuls based 
+    1 service which checks the state of the move
+    2 service which sets the state depending on the input
+    3 service which is the client who sets the input
 2. Write asyncio tests to check how it works
 3. Find one way to control the robot - easiest one (android app, remote control, ps3 pad)
 4. Engine steering based on control signals with asyncio
