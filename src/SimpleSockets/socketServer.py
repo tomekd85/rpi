@@ -22,10 +22,11 @@ class RequestHandler(socketserver.BaseRequestHandler):
             if key == b"q":
                 self.handle_loop = False
                 self.server.serve_forever_loop = False
+                actions.robot.finish_work()
                 break
             elif key != self.last_key:
                 actions.stop_moving()
-            
+
             func = actions.actions.get(key, actions.received)
             self.last_key = key
             func(key)
