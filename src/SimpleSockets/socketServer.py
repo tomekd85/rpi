@@ -23,7 +23,7 @@ class RequestHandler(socketserver.BaseRequestHandler):
         #self.last_key = ""
         while self.handle_loop:
             data = self.request.recv(1024)
-            print(data)
+            #print(data)
             key = self._collect_key(data)
             if not key:
                 continue
