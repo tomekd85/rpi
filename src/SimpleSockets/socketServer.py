@@ -54,6 +54,6 @@ class RequestHandler(socketserver.BaseRequestHandler):
         return key
 
 
-server = MyTCPServer(("127.0.0.1", 58888), RequestHandler)
+server = MyTCPServer(("", 58888), RequestHandler)
 server.serve_forever()
 
