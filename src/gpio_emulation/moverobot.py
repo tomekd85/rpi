@@ -20,25 +20,29 @@ class Baymax(object):
         self.pi.set_mode(self.a_in1, pigpio.OUTPUT)
         self.pi.set_mode(self.a_in1, pigpio.OUTPUT)
 
-    def move_forward(self):
+    def move_forward(self, *args, **kwargs):
         self._a_wheel_forward()
         self._b_wheel_forward()
         time.sleep(self.move_duration)
 
-    def move_backward(self):
+    def move_backward(self, *args, **kwargs):
         self._a_wheel_backward()
         self._b_wheel_backward()
         time.sleep(self.move_duration)
 
-    def turn_left(self):
+    def turn_left(self, *args, **kwargs):
         self._a_wheel_forward()
         self._b_wheel_backward()
         time.sleep(self.move_duration)
 
-    def turn_right(self):
+    def turn_right(self, *args, **kwargs):
         self._a_wheel_backward()
         self._b_wheel_forward()
         time.sleep(self.move_duration)
+
+    def stop(self, *args, **kwargs):
+        self._a_wheel_stop()
+        self._b_wheel_stop()
 
     def _a_wheel_forward(self):
         self.pi.write(self.a_in1, 1)

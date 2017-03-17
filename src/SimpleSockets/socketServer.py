@@ -1,5 +1,7 @@
 import socketserver
+import rpiMover
 import actions
+import threading
 
 class MyTCPServer(socketserver.TCPServer):
     def serve_forever(self):
@@ -11,10 +13,14 @@ class MyTCPServer(socketserver.TCPServer):
 class RequestHandler(socketserver.BaseRequestHandler):
     def setup(self):
         self.special_char = []
+        self.mover = rpiMover.Mover(0.1)
+        thread = threading.Thread(target = self.mover.move)
+        thread.start()
+
 
     def handle(self):
         self.handle_loop = True
-        self.last_key = ""
+        #self.last_key = ""
         while self.handle_loop:
             data = self.request.recv(1024)
             print(data)
@@ -22,14 +28,12 @@ class RequestHandler(socketserver.BaseRequestHandler):
             if key == b"q":
                 self.handle_loop = False
                 self.server.serve_forever_loop = False
-                actions.robot.finish_work()
+                self.mover.keep_going = False
                 break
-            elif key != self.last_key:
-                actions.stop_moving()
-
-            func = actions.actions.get(key, actions.received)
-            self.last_key = key
-            func(key)
+            #elif key != self.last_key:
+            #    actions.stop_moving()
+            self.mover.moves.appendleft(key)
+            #func(key)
 
     def _collect_key(self, data):
         for int_el in data:
