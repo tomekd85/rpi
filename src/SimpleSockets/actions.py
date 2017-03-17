@@ -37,9 +37,9 @@ actions = {b"w": robot.move_forward,
            b"s": robot.move_backward,
            b"d": robot.turn_right,
            "Stop" : robot.stop,
-           b"\x1b[A": go_forward,
-           b"\x1b[B": go_backward,
-           b"\x1b[C": go_right,
-           b"\x1b[D": go_left
+           b"\x1b[A": robot.move_forward,
+           b"\x1b[B": robot.move_backward,
+           b"\x1b[C": robot.turn_right,
+           b"\x1b[D": robot.turn_left
           }
 
