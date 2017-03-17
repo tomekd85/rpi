@@ -46,15 +46,19 @@ class Baymax(object):
 
     def _a_wheel_forward(self):
         self.pi.write(self.a_in1, 1)
+        self.pi.write(self.a_in2, 0)
 
     def _a_wheel_backward(self):
         self.pi.write(self.a_in2, 1)
+        self.pi.write(self.a_in1, 0)
 
     def _b_wheel_forward(self):
         self.pi.write(self.b_in1, 1)
+        self.pi.write(self.b_in2, 0)
 
     def _b_wheel_backward(self):
-        self.pi.write(self.b_in1, 1)
+        self.pi.write(self.b_in2, 1)
+        self.pi.write(self.b_in1, 0)
 
     def _a_wheel_stop(self):
         self.pi.write(self.a_in1, 0)
