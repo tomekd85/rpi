@@ -13,8 +13,8 @@ class MyTCPServer(socketserver.TCPServer):
 class RequestHandler(socketserver.BaseRequestHandler):
     def setup(self):
         self.special_char = []
-        self.mover = rpiMover.Mover(0.1)
-        thread = threading.Thread(target = self.mover.move)
+        self.mover = rpiMover.Mover(0.08)
+        thread = threading.Thread(target = self.mover.move, name="rpiMover")
         thread.start()
 
 
@@ -25,10 +25,12 @@ class RequestHandler(socketserver.BaseRequestHandler):
             data = self.request.recv(1024)
             print(data)
             key = self._collect_key(data)
+            if not key:
+                continue
             if key == b"q":
                 self.handle_loop = False
                 self.server.serve_forever_loop = False
-                self.mover.keep_going = False
+                self.mover.stop_moving()
                 break
             #elif key != self.last_key:
             #    actions.stop_moving()
@@ -46,12 +48,12 @@ class RequestHandler(socketserver.BaseRequestHandler):
                 elif len(self.special_char) >= 3:
                     self.special_char = []
                 else:
-                    continue
+                    key = b"" 
             else:
                 key = data
         return key
 
 
-with MyTCPServer(("127.0.0.1", 58888), RequestHandler) as server:
-    server.serve_forever()
+server = MyTCPServer(("127.0.0.1", 58888), RequestHandler)
+server.serve_forever()
 

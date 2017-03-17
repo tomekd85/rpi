@@ -23,22 +23,22 @@ class Baymax(object):
     def move_forward(self, *args, **kwargs):
         self._a_wheel_forward()
         self._b_wheel_forward()
-        time.sleep(self.move_duration)
+#        time.sleep(self.move_duration)
 
     def move_backward(self, *args, **kwargs):
         self._a_wheel_backward()
         self._b_wheel_backward()
-        time.sleep(self.move_duration)
+#        time.sleep(self.move_duration)
 
     def turn_left(self, *args, **kwargs):
         self._a_wheel_forward()
         self._b_wheel_backward()
-        time.sleep(self.move_duration)
+#        time.sleep(self.move_duration)
 
     def turn_right(self, *args, **kwargs):
         self._a_wheel_backward()
         self._b_wheel_forward()
-        time.sleep(self.move_duration)
+#        time.sleep(self.move_duration)
 
     def stop(self, *args, **kwargs):
         self._a_wheel_stop()
