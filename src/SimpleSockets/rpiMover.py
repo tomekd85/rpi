@@ -11,7 +11,6 @@ class Mover():
 
     def move(self):
         while self.keep_going:
-            print("Moves = {}".format(self.moves))
             num_of_moves_in_queue = len(self.moves)
 
             if self.queue_size > num_of_moves_in_queue > 1:
