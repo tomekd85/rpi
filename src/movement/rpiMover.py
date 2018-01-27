@@ -1,13 +1,32 @@
 from collections import deque
 import time
-import actions
+from movement import actions, consts
 
-class Mover():
-    def __init__(self, refresh_rate):
+
+class Mover:
+    # Singletone design pattern from:
+    # http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
+    __instance = None
+
+    def __new__(cls, refresh_rate=None):
+        if Mover.__instance is None:
+            Mover.__instance = object.__new__(cls)
+        Mover.__instance.move_duration = refresh_rate
+        return Mover.__instance
+
+    def __init__(self, refresh_rate=None):
         self.move_duration = refresh_rate
         self.keep_going = True
         self.moves = deque()
         self.queue_size = 5
+
+    def set_move_duration(self, value):
+        self._move_duration = value or consts.Movement.REFRESH_RATE
+
+    def get_move_duration(self):
+        return self._move_duration
+
+    move_duration = property(get_move_duration, set_move_duration)
 
     def move(self):
         while self.keep_going:

@@ -1,6 +1,5 @@
 import socketserver
-import rpiMover
-import actions
+from movement import rpiMover, actions
 import threading
 
 class MyTCPServer(socketserver.TCPServer):
@@ -11,12 +10,12 @@ class MyTCPServer(socketserver.TCPServer):
 
 
 class RequestHandler(socketserver.BaseRequestHandler):
+
     def setup(self):
         self.special_char = []
         self.mover = rpiMover.Mover(0.08)
-        thread = threading.Thread(target = self.mover.move, name="rpiMover")
+        thread = threading.Thread(target=self.mover.move, name="rpiMover")
         thread.start()
-
 
     def handle(self):
         self.handle_loop = True

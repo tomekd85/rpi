@@ -1,36 +1,13 @@
-import sys, os
-parent = os.path.pardir
-sys.path.append(parent)
+# from gpio_emulation.moverobot import Baymax
 
-from gpio_emulation.moverobot import Baymax
-
-
-def go_forward(key):
-    print("going forward")
-
-
-def go_backward(key):
-    print("going back")
-
-
-def go_left(key):
-    print("turning left")
-
-
-def go_right(key):
-    print("turning right")
-
-
-def stop_moving(key):
-    print("Stopped moving")
-
+from movement.mover import Mover
 
 def received(el):
     print("Received {}".format(el))
 
 special_keys = (b"\x1b[A", b"\x1b[B", b"\x1b[C", b"\x1b[D")
 
-robot = Baymax()
+robot =Mover()
 
 actions = {b"w": robot.move_forward,
            b"a": robot.turn_left,

@@ -1,7 +1,11 @@
-import pigpio
 import time
 
-class Baymax(object):
+import pigpio
+
+from movement.mover import Mover
+
+
+class Baymax(Mover):
     def __init__(self):
         self.move_duration = 0.5
 
