@@ -1,11 +1,11 @@
 import asyncio
 import threading
-from asyncioServer.asyncioServer import EchoServerClientProtocol
+from asyncioNetworkServer.asyncioTCPServer import EchoServerClientProtocol
 
-from movement import actions, rpiMover
+from movement import rpiMover
 
 if __name__ == "__main__":
-    # Run moving functionallity
+    # Run moving functionality
     mover = rpiMover.Mover()
     thread = threading.Thread(target=mover.move, name="rpiMover")
     thread.start()

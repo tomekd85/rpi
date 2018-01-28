@@ -44,7 +44,7 @@ class EchoServerClientProtocol(asyncio.Protocol):
 if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
-    # Each client connection will create a new protocol instance
+    # Each NetworkClient connection will create a new protocol instance
     coro = loop.create_server(EchoServerClientProtocol, '127.0.0.1', 58888)
     server = loop.run_until_complete(coro)
 

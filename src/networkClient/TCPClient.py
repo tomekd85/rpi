@@ -1,5 +1,5 @@
 import sys, os
-# Extend client path
+# Extend NetworkClient path
 extended_path = os.path.abspath(__file__)
 parent = os.path.sep.join(extended_path.split(os.path.sep)[:-2])
 sys.path.append(parent)

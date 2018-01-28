@@ -5,6 +5,7 @@ from movement.mover import Mover
 def received(el):
     print("Received {}".format(el))
 
+
 special_keys = (b"\x1b[A", b"\x1b[B", b"\x1b[C", b"\x1b[D")
 
 robot =Mover()
