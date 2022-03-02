@@ -1,4 +1,4 @@
-# rpi
+# rpi robot na biurko
 - Wygląd robota z guzikami funkcyjnymi jako guziki koszuli
 - nogi i ręce luźne jak u robota M u Szymona
 - Zobaczyć czy da się rozpoznać przytrzymanie guzika
@@ -8,3 +8,5 @@
 - Sterowanie 5/3 guzikami
 - może radio internetowe ?
 
+- Zobaczyć możliwości sterowania oświetleniem i oświetlenia spod raspberry Pi
+- 
